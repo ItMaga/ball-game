@@ -11,8 +11,8 @@ export default class Player {
   private readonly availableDirections: Array<string> = [KeyCode.ArrowRight, KeyCode.ArrowLeft];
 
   constructor() {
-    this.drawPlayer();
     this.playerLoop.start();
+    this.drawPlayer();
     document.addEventListener('keydown', this.keyDownListener.bind(this), false);
     document.addEventListener('keyup', this.keyUpListener.bind(this), false);
   }

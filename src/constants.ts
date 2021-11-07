@@ -5,5 +5,5 @@ export enum KeyCode {
   ArrowDown = 'ArrowDown',
 }
 
-export const PLAYER_HEIGHT = 15;
+export const PLAYER_HEIGHT = 12;
 export const PLAYER_WIDTH = 50;
