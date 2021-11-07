@@ -1,6 +1,7 @@
 import Canvas from './Canvas';
-import { KeyCode, PLAYER_HEIGHT, PLAYER_WIDTH } from '../constants';
 import Loop from './Loop';
+
+import { CELL_HEIGHT, CELL_ROWS, KeyCode, PLAYER_HEIGHT, PLAYER_WIDTH } from '../constants';
 
 const PLAYER_STEP = 10;
 
@@ -38,7 +39,7 @@ export default class Player {
   }
 
   private static clearCanvas() {
-    Canvas.context.clearRect(0, 0, Canvas.width, Canvas.height);
+    Canvas.context.clearRect(0, CELL_ROWS * CELL_HEIGHT, Canvas.width, Canvas.height);
   }
 
   private drawPlayer() {
