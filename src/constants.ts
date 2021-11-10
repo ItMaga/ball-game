@@ -11,3 +11,5 @@ export const PLAYER_WIDTH = 50;
 export const CELL_WIDTH = 50;
 export const CELL_HEIGHT = 12;
 export const CELL_ROWS = 3;
+
+export const BALL_RADIUS = 8;
