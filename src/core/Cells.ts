@@ -1,12 +1,13 @@
 import Canvas from './Canvas';
 
-import { CELL_HEIGHT, CELL_ROWS, CELL_WIDTH } from '../constants';
+import { CELL_HEIGHT, CELL_ROWS, CELL_WIDTH, CellStatuses } from '../constants';
 
 export interface Cell {
   x1: number;
   x2: number;
   y1: number;
   y2: number;
+  status: CellStatuses;
 }
 
 export default class Cells {
@@ -14,35 +15,46 @@ export default class Cells {
   public cells: Array<Cell> = [];
 
   constructor() {
-    this.drawCells();
+    this.initCells();
   }
 
   public loopCallback() {
     this.drawCells();
   }
 
-  private drawCells() {
-    this.resetCells();
+  public inactivateCell(cellIndex: number, cell: Cell) {
+    this.cells.splice(cellIndex, 1, { ...cell, status: CellStatuses.INACTIVE });
+  }
 
+  private initCells() {
     for (let row = 0; row < CELL_ROWS; row++) {
       for (let i = 0; i < this.cellsOnLine; i++) {
         const x = CELL_WIDTH * i;
         const y = row * CELL_HEIGHT;
 
-        Canvas.context.fillStyle = 'white';
-        Canvas.context.rect(x, y, CELL_WIDTH, CELL_HEIGHT);
-        Canvas.context.fill();
-        Canvas.context.stroke();
-        this.pushCell({ x1: x, x2: x + CELL_WIDTH, y1: y, y2: y + CELL_HEIGHT });
+        this.pushCell({
+          x1: x,
+          x2: x + CELL_WIDTH,
+          y1: y,
+          y2: y + CELL_HEIGHT,
+          status: CellStatuses.ACTIVE,
+        });
       }
     }
   }
 
-  private pushCell({ x1, x2, y1, y2 }: Cell) {
-    this.cells.push({ x1, x2, y1, y2 });
+  private drawCells() {
+    this.cells.forEach(({ x1, y1, status }) => {
+      if (status === CellStatuses.ACTIVE) {
+        Canvas.context.fillStyle = 'white';
+        Canvas.context.rect(x1, y1, CELL_WIDTH, CELL_HEIGHT);
+        Canvas.context.fill();
+        Canvas.context.stroke();
+      }
+    });
   }
 
-  private resetCells() {
-    this.cells = [];
+  private pushCell(cell: Cell) {
+    this.cells.push(cell);
   }
 }

@@ -5,6 +5,11 @@ export enum KeyCode {
   ArrowDown = 'ArrowDown',
 }
 
+export enum CellStatuses {
+  INACTIVE,
+  ACTIVE,
+}
+
 export const PLAYER_HEIGHT = 12;
 export const PLAYER_WIDTH = 50;
 

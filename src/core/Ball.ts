@@ -1,7 +1,7 @@
 import Canvas from './Canvas';
 import Cells from './Cells';
 
-import { BALL_RADIUS } from '../constants';
+import { BALL_RADIUS, CellStatuses } from '../constants';
 
 export default class Ball {
   private x = Math.round(Canvas.width / 2);
@@ -17,6 +17,8 @@ export default class Ball {
 
   public loopCallback() {
     this.drawBall();
+    this.detectCollision();
+
     const nextPositionX = this.x + this.dx;
     const nextPositionY = this.y + this.dy;
     if (nextPositionX > Canvas.width - BALL_RADIUS || nextPositionX < BALL_RADIUS) {
@@ -27,6 +29,24 @@ export default class Ball {
     }
     this.x += this.dx;
     this.y += this.dy;
+  }
+
+  private detectCollision() {
+    const collisionCellIndex = this.cells.cells.findIndex(
+      (cell) =>
+        cell.status === CellStatuses.ACTIVE &&
+        this.y - BALL_RADIUS > cell.y1 &&
+        this.y - BALL_RADIUS < cell.y2 &&
+        this.x - BALL_RADIUS > cell.x1 &&
+        this.x - BALL_RADIUS < cell.x2,
+    );
+
+    if (collisionCellIndex >= 0) {
+      this.dy = -this.dy;
+      this.cells.inactivateCell(collisionCellIndex, this.cells.cells[collisionCellIndex]);
+      return true;
+    }
+    return false;
   }
 
   private drawBall() {
