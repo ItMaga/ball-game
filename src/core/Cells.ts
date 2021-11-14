@@ -16,10 +16,12 @@ export default class Cells {
   public cells: Array<Cell> = [];
   private readonly cellsOnLine = Math.round(Canvas.width / CELL_WIDTH);
   private score: Score;
+  private readonly playerWin: () => void;
 
-  constructor(score: Score) {
+  constructor(score: Score, playerWin: () => void) {
     this.initCells();
     this.score = score;
+    this.playerWin = playerWin;
   }
 
   public loopCallback() {
@@ -29,6 +31,14 @@ export default class Cells {
   public inactivateCell(cellIndex: number, cell: Cell) {
     this.cells.splice(cellIndex, 1, { ...cell, status: CellStatuses.INACTIVE });
     this.score.increment();
+    if (!this.hasActiveCells) {
+      this.playerWin();
+    }
+  }
+
+  private get hasActiveCells(): boolean {
+    const activeCells = this.cells.filter((cell) => cell.status === CellStatuses.ACTIVE);
+    return Boolean(activeCells.length);
   }
 
   private initCells() {

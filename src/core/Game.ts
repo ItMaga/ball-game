@@ -4,11 +4,11 @@ import Ball from './Ball';
 import Loop from './Loop';
 import Canvas from './Canvas';
 import Score from './Score';
-import GameOver from './GameOver';
+import Screens from './Screens';
 
 export default class Game {
   private score = new Score();
-  private cells = new Cells(this.score);
+  private cells = new Cells(this.score, this.playerWin.bind(this));
   private player = new Player();
   private ball = new Ball(this.cells, this.player, this.gameOver.bind(this));
   private gameLoop = new Loop(10, this.gameLoopCallback.bind(this));
@@ -26,7 +26,15 @@ export default class Game {
     this.score.reset();
     setTimeout(() => {
       Game.clearCanvas();
-      GameOver.drawScreen();
+      Screens.drawGameOverScreen();
+    });
+  }
+
+  private playerWin() {
+    this.gameLoop.stop();
+    setTimeout(() => {
+      Game.clearCanvas();
+      Screens.drawPlayerWinScreen();
     });
   }
 

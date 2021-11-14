@@ -11,7 +11,7 @@ export default class Ball {
   private dy = -2;
   private cells: Cells;
   private player: Player;
-  private gameOver: () => void;
+  private readonly gameOver: () => void;
 
   constructor(cells: Cells, player: Player, gameOver: () => void) {
     this.cells = cells;
