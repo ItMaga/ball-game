@@ -24,6 +24,8 @@ jobs:
 
     - name: Build
       run: |
+        git config --global user.email "m-chemurziev@ya.ru"
+        git config --global user.name "ItMaga"
         yarn
         npx webpack
         yarn deploy
