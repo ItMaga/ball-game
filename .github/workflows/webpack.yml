@@ -17,8 +17,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      run: |
-        git config user.email "m-chemurziev@ya.ru" && git config user.name "ItMaga"
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
