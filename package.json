@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "ItMaga",
   "license": "MIT",
+  "homepage": "https://github.com/ItMaga/ball-game",
   "scripts": {
     "start": "webpack serve",
     "build": "webpack --mode=production --node-env=production",
