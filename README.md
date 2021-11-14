@@ -1,13 +1,4 @@
-# 🏓 Game Ball!
-
-```
-npm run build
-```
-
-or
-
-```
-yarn build
-```
-
-to bundle your application
+# 🏓 BallGame!
+## Dev by TypeScript + Canvas 
+### BallGame like DXBall only much worse)
+#### 🎮 Demo: https://itmaga.github.io/ball-game/
