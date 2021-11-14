@@ -11,6 +11,11 @@ export default class Score {
     this.updateScore();
   }
 
+  public reset() {
+    this.score = 0;
+    this.updateScore();
+  }
+
   private updateScore() {
     this.scoreElement.innerText = String(this.score);
   }

@@ -11,11 +11,12 @@ export default class Ball {
   private dy = -2;
   private cells: Cells;
   private player: Player;
+  private gameOver: () => void;
 
-  constructor(cells: Cells, player: Player) {
-    this.drawBall();
+  constructor(cells: Cells, player: Player, gameOver: () => void) {
     this.cells = cells;
     this.player = player;
+    this.gameOver = gameOver;
   }
 
   public loopCallback() {
@@ -31,7 +32,7 @@ export default class Ball {
     if (nextPositionY < BALL_RADIUS || this.isPlayerCollision) {
       this.dy = -this.dy;
     } else if (nextPositionY > Canvas.height - BALL_RADIUS) {
-      console.log('GAME OVER');
+      this.gameOver();
     }
 
     this.x += this.dx;

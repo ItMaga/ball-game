@@ -11,7 +11,6 @@ export default class Player {
   private readonly y = Canvas.height - PLAYER_HEIGHT;
 
   constructor() {
-    this.drawPlayer();
     document.addEventListener('keydown', this.keyDownListener.bind(this), false);
     document.addEventListener('keyup', this.keyUpListener.bind(this), false);
   }
