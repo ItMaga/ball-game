@@ -3,11 +3,13 @@ import Cells from './Cells';
 import Ball from './Ball';
 import Loop from './Loop';
 import Canvas from './Canvas';
+import Score from './Score';
 
 export default class Game {
+  private score = new Score();
+  private cells = new Cells(this.score);
   private player = new Player();
-  private cells = new Cells();
-  private ball = new Ball(this.cells);
+  private ball = new Ball(this.cells, this.player);
   private gameLoop = new Loop(10, this.gameLoopCallback.bind(this));
 
   constructor() {

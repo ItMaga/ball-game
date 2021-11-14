@@ -1,6 +1,7 @@
 import Canvas from './Canvas';
 
 import { CELL_HEIGHT, CELL_ROWS, CELL_WIDTH, CellStatuses } from '../constants';
+import Score from './Score';
 
 export interface Cell {
   x1: number;
@@ -11,11 +12,13 @@ export interface Cell {
 }
 
 export default class Cells {
-  private readonly cellsOnLine = Math.round(Canvas.width / CELL_WIDTH);
   public cells: Array<Cell> = [];
+  private readonly cellsOnLine = Math.round(Canvas.width / CELL_WIDTH);
+  private score: Score;
 
-  constructor() {
+  constructor(score: Score) {
     this.initCells();
+    this.score = score;
   }
 
   public loopCallback() {
@@ -24,6 +27,7 @@ export default class Cells {
 
   public inactivateCell(cellIndex: number, cell: Cell) {
     this.cells.splice(cellIndex, 1, { ...cell, status: CellStatuses.INACTIVE });
+    this.score.increment();
   }
 
   private initCells() {
