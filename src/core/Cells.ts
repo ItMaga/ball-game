@@ -1,7 +1,8 @@
 import Canvas from './Canvas';
-
-import { CELL_HEIGHT, CELL_ROWS, CELL_WIDTH, CellStatuses } from '../constants';
 import Score from './Score';
+
+import randomBoolean from '../utils/randomBoolean';
+import { CELL_HEIGHT, CELL_ROWS, CELL_WIDTH, CellStatuses } from '../constants';
 
 export interface Cell {
   x1: number;
@@ -41,7 +42,7 @@ export default class Cells {
           x2: x + CELL_WIDTH,
           y1: y,
           y2: y + CELL_HEIGHT,
-          status: CellStatuses.ACTIVE,
+          status: randomBoolean() ? CellStatuses.ACTIVE : CellStatuses.INACTIVE,
         });
       }
     }
