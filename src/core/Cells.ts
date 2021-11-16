@@ -17,7 +17,7 @@ export interface Cell {
 export default class Cells {
   public cells: Array<Cell> = [];
   private readonly cellsOnLine = Math.round(Canvas.width / CELL_WIDTH);
-  private readonly rows = randomNumber(5);
+  private readonly rows = randomNumber(1, 5);
   private score: Score;
   private readonly playerWin: () => void;
 
