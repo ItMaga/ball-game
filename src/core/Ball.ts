@@ -43,9 +43,9 @@ export default class Ball {
     const { x1, x2, y1, y2 } = this.player.playerCoordinates;
     return (
       this.x + BALL_RADIUS > x1 &&
-      this.x + BALL_RADIUS < x2 &&
+      this.x - BALL_RADIUS < x2 &&
       this.y + BALL_RADIUS > y1 &&
-      this.y + BALL_RADIUS < y2
+      this.y - BALL_RADIUS < y2
     );
   }
 

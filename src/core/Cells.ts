@@ -2,7 +2,9 @@ import Canvas from './Canvas';
 import Score from './Score';
 
 import randomBoolean from '../utils/randomBoolean';
-import { CELL_HEIGHT, CELL_ROWS, CELL_WIDTH, CellStatuses } from '../constants';
+import randomNumber from '../utils/randomNumber';
+
+import { CELL_HEIGHT, CELL_WIDTH, CellStatuses } from '../constants';
 
 export interface Cell {
   x1: number;
@@ -15,6 +17,7 @@ export interface Cell {
 export default class Cells {
   public cells: Array<Cell> = [];
   private readonly cellsOnLine = Math.round(Canvas.width / CELL_WIDTH);
+  private readonly rows = randomNumber(5);
   private score: Score;
   private readonly playerWin: () => void;
 
@@ -42,7 +45,7 @@ export default class Cells {
   }
 
   private initCells() {
-    for (let row = 0; row < CELL_ROWS; row++) {
+    for (let row = 0; row < this.rows; row++) {
       for (let i = 0; i < this.cellsOnLine; i++) {
         const x = CELL_WIDTH * i;
         const y = row * CELL_HEIGHT;
